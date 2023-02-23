@@ -1,46 +1,45 @@
-class AllEater {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.energy = 10;
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x,     this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y    ],
-            [this.x + 1, this.y    ],
-            [this.x - 1, this.y + 1],
-            [this.x,     this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-    }
-    getNewCoordinates() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x,     this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y    ],
-            [this.x + 1, this.y    ],
-            [this.x - 1, this.y + 1],
-            [this.x,     this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-    }
-    chooseCell(character, character1) {
-        let found = [];
-        this.getNewCoordinates();
+class AllEater extends LivingCreature {
 
-        for (let i = 0; i < this.directions.length; i++) {
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
-            if (x >= 0 && y >= 0 && x < matrix[0].length && y < matrix.length) {
-                if (matrix[y][x] === character || matrix[y][x] === character1) {
-                    found.push(this.directions[i])
-                }
-            }
-        }
-        return found;
+    constructor(x, y, index){
+    
+    super(x, y, index);
+    this.energy = 8;
+    
+    
     }
+    
+    getNewCoordinates() {
+    
+    this.directions = [
+    
+    [this.x - 1, this.y - 1],
+    
+    [this.x, this.y - 1],
+    
+    [this.x + 1, this.y - 1],
+    
+    [this.x - 1, this.y],
+    
+    [this.x + 1, this.y],
+    
+    [this.x - 1, this.y + 1],
+    
+    [this.x, this.y + 1],
+    
+    [this.x + 1, this.y + 1]
+    
+    ];
+    
+    }
+    
+    chooseCell(character,character1) {
+    
+    this.getNewCoordinates();
+    
+    return super.chooseCell(character, character1);
+    
+    }
+    
     eat() {
         let found = this.chooseCell(1, 2);
         let oneCell = random(found);
