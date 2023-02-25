@@ -1,42 +1,48 @@
-class Bomb extends LivingCreature {
+let LivingCreature = require("./living")
+module.exports = class Bomb extends LivingCreature {
 
-    constructor(x, y, index){
-    
-    super(x, y, index);
-    this.energy = 8;
-    
+    constructor(x, y, index) {
+
+        super(x, y, index);
+        this.energy = 8;
+
     }
-    
+
     getNewCoordinates() {
-    
-    this.directions = [
-    
-    [this.x - 1, this.y - 1],
-    
-    [this.x, this.y - 1],
-    
-    [this.x + 1, this.y - 1],
-    
-    [this.x - 1, this.y],
-    
-    [this.x + 1, this.y],
-    
-    [this.x - 1, this.y + 1],
-    
-    [this.x, this.y + 1],
-    
-    [this.x + 1, this.y + 1]
-    
-    ];
-    
+
+        this.directions = [
+
+            [this.x - 1, this.y - 1],
+
+            [this.x, this.y - 1],
+
+            [this.x + 1, this.y - 1],
+
+            [this.x - 1, this.y],
+
+            [this.x + 1, this.y],
+
+            [this.x - 1, this.y + 1],
+
+            [this.x, this.y + 1],
+
+            [this.x + 1, this.y + 1]
+
+        ];
+
     }
-    
+
+    random(ch) {
+        let found = this.chooseCell(ch);
+        let result = Math.floor(Math.random() * found.length)
+        return found[result];
+    }
     chooseCell(character, character2, character3, character4) {
-    
-    this.getNewCoordinates();
-    
-    return super.chooseCell(character, character2, character3, character4);
-    
+
+        this.getNewCoordinates();
+
+        return super.chooseCell(character, character2, character3, character4);
+
     }
     chooseCell(character, character2) {
         let found = [];
@@ -53,8 +59,9 @@ class Bomb extends LivingCreature {
         return found;
     }
     eat() {
-        let found = this.chooseCell(2, 3);
-        let oneCell = random(found);
+        // let found = this.chooseCell(2, 3);
+        let oneCell = this.random(2);
+      
         if (oneCell) {
             this.energy += 5;
             let newX = oneCell[0];
@@ -88,8 +95,8 @@ class Bomb extends LivingCreature {
         }
     }
     move() {
-        let found = this.chooseCell(0);
-        let oneCell = random(found);
+        // let found = this.chooseCell(0);
+        let oneCell = this.random(0);
         if (oneCell) {
             let newX = oneCell[0];
             let newY = oneCell[1];
@@ -119,13 +126,13 @@ class Bomb extends LivingCreature {
         }
     }
     mul() {
-        let found = this.chooseCell(0);
-        let oneCell = random(found);
-        if (oneCell){
+        // let found = this.chooseCell(0);
+        let oneCell = this.random(0);
+        if (oneCell) {
             let x = oneCell[0];
             let y = oneCell[1];
             matrix[y][x] = 4;
-            let bomb = new Bomb (x, y);
+            let bomb = new Bomb(x, y);
             bombArr.push(bomb);
             this.energy = 15;
         }

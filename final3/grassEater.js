@@ -1,11 +1,17 @@
-class GrassEater extends LivingCreature {
+let LivingCreature = require("./living")
+module.exports = class GrassEater extends LivingCreature{
 
     constructor(x, y, index){
       super(x, y, index);
     this.energy = 8;
-     this.gender = 'male'; 
+    
     }
     
+    random(ch){
+        let found = this.chooseCell(ch);
+        let result = Math.floor(Math.random()*found.length)
+        return found[result];
+    }
     getNewCoordinates() {
     
     this.directions = [
@@ -39,8 +45,8 @@ class GrassEater extends LivingCreature {
     }
     
     eat(){
-        let found = this.chooseCell(1);
-        let oneCell = random(found);
+        // let found = this.chooseCell(1);
+        let oneCell = this.random(1);
         if(oneCell) {
             this.energy += 4;
             let newX = oneCell[0];
@@ -64,8 +70,8 @@ class GrassEater extends LivingCreature {
         }
     }
     move(){
-        let found = this.chooseCell(0);
-        let oneCell = random(found);
+        // let found = this.chooseCell(0);
+        let oneCell = this.random(0);
         if(oneCell){
             let newX = oneCell[0];
             let newY = oneCell[1];
@@ -96,8 +102,8 @@ class GrassEater extends LivingCreature {
     }
 
     mul(){
-        let found = this.chooseCell(0);
-        let oneCell = random(found);
+        // let found = this.chooseCell(0);
+        let oneCell = this.random(0);
         if(oneCell){
             let x = oneCell[0];
             let y = oneCell[1];
@@ -106,9 +112,7 @@ class GrassEater extends LivingCreature {
             grassEaterArr.push(grassEater);
             this.energy = 8;
         }
-        if (gender){
-            this.gender = b
-        }
+     
     }
 
 }

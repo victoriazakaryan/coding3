@@ -1,48 +1,57 @@
-class AllEater extends LivingCreature {
+let LivingCreature = require("./living")
+module.exports = class AllEater extends LivingCreature {
 
-    constructor(x, y, index){
-    
-    super(x, y, index);
-    this.energy = 8;
-    
-    
+    constructor(x, y, index) {
+
+        super(x, y, index);
+        this.energy = 8;
+
+
     }
-    
+
+    random(ch){
+        let found = this.chooseCell(ch);
+        let result = Math.floor(Math.random()*found.length)
+        return found[result];
+    }
     getNewCoordinates() {
-    
-    this.directions = [
-    
-    [this.x - 1, this.y - 1],
-    
-    [this.x, this.y - 1],
-    
-    [this.x + 1, this.y - 1],
-    
-    [this.x - 1, this.y],
-    
-    [this.x + 1, this.y],
-    
-    [this.x - 1, this.y + 1],
-    
-    [this.x, this.y + 1],
-    
-    [this.x + 1, this.y + 1]
-    
-    ];
-    
+
+        this.directions = [
+
+            [this.x - 1, this.y - 1],
+
+            [this.x, this.y - 1],
+
+            [this.x + 1, this.y - 1],
+
+            [this.x - 1, this.y],
+
+            [this.x + 1, this.y],
+
+            [this.x - 1, this.y + 1],
+
+            [this.x, this.y + 1],
+
+            [this.x + 1, this.y + 1]
+
+        ];
+
     }
-    
-    chooseCell(character,character1) {
-    
-    this.getNewCoordinates();
-    
-    return super.chooseCell(character, character1);
-    
+
+    chooseCell(character, character1) {
+
+        this.getNewCoordinates();
+
+        return super.chooseCell(character, character1);
+
     }
-    
+
     eat() {
-        let found = this.chooseCell(1, 2);
-        let oneCell = random(found);
+        // let found = this.chooseCell(1, 2);
+        let oneCell = this.random(1);
+
+       
+        
         if (oneCell) {
             this.energy += 10;
             let newX = oneCell[0];
@@ -76,8 +85,8 @@ class AllEater extends LivingCreature {
         }
     }
     move() {
-        let found = this.chooseCell(0);
-        let oneCell = random(found);
+        // let found = this.chooseCell(0);
+        let oneCell = this.random(0);
         if (oneCell) {
             let newX = oneCell[0];
             let newY = oneCell[1];
@@ -107,8 +116,8 @@ class AllEater extends LivingCreature {
         }
     }
     mul() {
-        let found = this.chooseCell(0);
-        let oneCell = random(found);
+        // let found = this.chooseCell(0);
+        let oneCell = this.random(0);
         if (oneCell) {
             let x = oneCell[0];
             let y = oneCell[1];
