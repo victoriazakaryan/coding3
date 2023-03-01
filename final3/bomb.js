@@ -1,5 +1,4 @@
-let LivingCreature = require("./living")
-module.exports = class Bomb extends LivingCreature {
+class Bomb extends LivingCreature {
 
     constructor(x, y, index) {
 
@@ -32,9 +31,9 @@ module.exports = class Bomb extends LivingCreature {
 
     }
 
-    random(ch) {
-        let found = this.chooseCell(ch);
-        let result = Math.floor(Math.random() * found.length)
+    random(min, max){
+        let found = this.chooseCell(Math.floor(Math.random()*max)+min);
+        let result = Math.floor(Math.random()*found.length)
         return found[result];
     }
     chooseCell(character, character2, character3, character4) {
@@ -59,10 +58,9 @@ module.exports = class Bomb extends LivingCreature {
         return found;
     }
     eat() {
-        // let found = this.chooseCell(2, 3);
-        let oneCell = this.random(2);
-      
-        if (oneCell) {
+        // let found = this.chooseCell(2,3);
+        let oneCell = this.random(2,3);
+         if (oneCell) {
             this.energy += 5;
             let newX = oneCell[0];
             let newY = oneCell[1];

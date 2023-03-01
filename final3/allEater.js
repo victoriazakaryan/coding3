@@ -1,5 +1,4 @@
-let LivingCreature = require("./living")
-module.exports = class AllEater extends LivingCreature {
+class AllEater extends LivingCreature {
 
     constructor(x, y, index) {
 
@@ -9,8 +8,8 @@ module.exports = class AllEater extends LivingCreature {
 
     }
 
-    random(ch){
-        let found = this.chooseCell(ch);
+    random(min, max){
+        let found = this.chooseCell(Math.floor(Math.random()*max)+min);
         let result = Math.floor(Math.random()*found.length)
         return found[result];
     }
@@ -48,8 +47,8 @@ module.exports = class AllEater extends LivingCreature {
 
     eat() {
         // let found = this.chooseCell(1, 2);
-        let oneCell = this.random(1);
-
+        let oneCell = this.random(1,2);
+        console.log(oneCell)
        
         
         if (oneCell) {
